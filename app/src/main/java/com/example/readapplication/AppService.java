@@ -6,18 +6,13 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.telephony.SmsMessage;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -35,7 +30,7 @@ public class AppService extends Service {
     public static final String BROADCAST_NEW_CALL_DETECTED = "android.intent.action.PHONE_STATE";
 
     private NotificationCompat.Builder notificationBuilder;
-    private ReceiveSms receiveSms;
+    private ReceiveSmsAndCall receiveSms;
 
     private boolean isServiceRunningRightNow = false;
 
@@ -45,7 +40,7 @@ public class AppService extends Service {
 
     @Override
     public void onCreate() {
-        receiveSms = new ReceiveSms();
+        receiveSms = new ReceiveSmsAndCall();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BROADCAST_NEW_MASSAGE_DETECTED);
         intentFilter.addAction(BROADCAST_NEW_CALL_DETECTED);

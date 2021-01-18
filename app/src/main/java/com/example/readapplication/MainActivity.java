@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
     MaterialButton main_BTN_start;
     MaterialButton main_BTN_stop;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

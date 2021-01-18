@@ -10,9 +10,7 @@ import java.util.Date;
 public class StatePhoneListener extends PhoneStateListener {
 
     private Context context;
-
-    private Date callStartTime;
-    private Date callSEndTime;
+    private Call call;
     private int lastState = TelephonyManager.CALL_STATE_IDLE;
     private boolean isIncoming = false;
 
@@ -25,26 +23,33 @@ public class StatePhoneListener extends PhoneStateListener {
         super.onCallStateChanged(state, incomingNumber);
         switch (state) {
             case TelephonyManager.CALL_STATE_RINGING:
-                Log.d("pttt", "Ring ");
+                call = new Call();
+                call.setCallNumber(incomingNumber);
                 isIncoming = true;
                 break;
 
             case TelephonyManager.CALL_STATE_OFFHOOK:
-                callStartTime = new Date();
-                Log.d("pttt", " answer , number: " + incomingNumber + " time: " + callStartTime);
+                call.setCallStartTime(new Date());
                 break;
 
             case TelephonyManager.CALL_STATE_IDLE:
                 if(lastState == TelephonyManager.CALL_STATE_RINGING){
-                    Log.d("pttt", "Ring but no pickup");
+                    call.setCallStartTime(new Date());
+                    call.setCallSEndTime(call.getCallStartTime());
                 } else if (isIncoming){
-                    callSEndTime = new Date();
-                    Log.d("pttt", "end , number: " + incomingNumber + " time: " + callSEndTime);
+                    call.setCallSEndTime(new Date());
                     isIncoming = false;
-                    break;
                 }
+
+                saveCallToDB(call);
+                break;
         }
 
+        lastState = state;
+    }
+
+    private void saveCallToDB(Call call) {
+        Log.d("pttt", "call number: " + call.getCallNumber() + " start time: " + call.getCallStartTime() + " ent time: " + call.getCallSEndTime());
     }
 
 }

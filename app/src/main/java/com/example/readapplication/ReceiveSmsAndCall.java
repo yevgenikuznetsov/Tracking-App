@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-public class ReceiveSms extends BroadcastReceiver {
+public class ReceiveSmsAndCall extends BroadcastReceiver {
     private StatePhoneListener phoneStateListener;
 
 
