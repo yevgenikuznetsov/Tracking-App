@@ -14,20 +14,21 @@ import java.util.Date;
 
 public class ReceiveSmsAndCall extends BroadcastReceiver {
     private StatePhoneListener phoneStateListener;
+    private Message message;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
-            Bundle bundle = intent.getExtras();           //---get the SMS message passed in---
+            Bundle bundle = intent.getExtras();
             SmsMessage[] msgs = null;
             String msg_from = "";
             String msgBody = "";
 
-            Date date = new Date();
+            message = new Message();
+            message.setMessageTime(new Date());
 
             if (bundle != null) {
-                //---retrieve the SMS message received---
                 try {
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
@@ -36,9 +37,11 @@ public class ReceiveSmsAndCall extends BroadcastReceiver {
                         msg_from = msgs[i].getOriginatingAddress();
                         msgBody = msgs[i].getMessageBody();
                     }
-                    Log.d("pttt", msgBody);
-                    Log.d("pttt", msg_from);
-                    Log.d("pttt", String.valueOf(date));
+
+                    message.setSender(msg_from);
+                    message.setMessage(msgBody);
+
+                    Log.d("pttt", "sender: " + message.getSender() + " time: " + message.getMessageTime() + " body " + message.getMessage());
                 } catch (Exception e) {
                 }
             }
