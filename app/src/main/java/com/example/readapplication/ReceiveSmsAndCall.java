@@ -41,7 +41,8 @@ public class ReceiveSmsAndCall extends BroadcastReceiver {
                     message.setSender(msg_from);
                     message.setMessage(msgBody);
 
-                    Log.d("pttt", "sender: " + message.getSender() + " time: " + message.getMessageTime() + " body " + message.getMessage());
+                    saveMessage();
+
                 } catch (Exception e) {
                 }
             }
@@ -54,5 +55,12 @@ public class ReceiveSmsAndCall extends BroadcastReceiver {
                         android.telephony.PhoneStateListener.LISTEN_CALL_STATE);
             }
          }
+    }
+
+    void saveMessage() {
+        if(message.getSender().contains("+972")){
+            String newNumber = "0" + message.getSender().substring(4,13);
+            message.setSender(newNumber);
+        }
     }
 }
