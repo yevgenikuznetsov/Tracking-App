@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViews();
         initViews();
-        askForPermissions();
+
     }
 
     private void initViews() {
@@ -55,13 +55,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startService(startIntent);
         }
-    }
-
-    private void askForPermissions(){
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.RECEIVE_SMS,
-                Manifest.permission.READ_CALL_LOG}, 1);
     }
 
     private void findViews() {

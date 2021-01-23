@@ -15,8 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadApplication">
-        <activity android:name=".Sign_Up_Screen"></activity>
-        <activity android:name=".Open_Screen" />
+        <activity android:name=".Main_Screen"></activity>
+        <activity android:name=".Sign_Up_Screen" />
+        <activity android:name=".Open_Screen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".AppService"
@@ -24,16 +31,7 @@
             android:exported="false"
             android:stopWithTask="false" />
 
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
