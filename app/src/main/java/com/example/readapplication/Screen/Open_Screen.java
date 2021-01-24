@@ -1,4 +1,4 @@
-package com.example.readapplication;
+package com.example.readapplication.Screen;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.readapplication.Aid.CheckInputValue;
+import com.example.readapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class Open_Screen extends AppCompatActivity {
 
@@ -95,7 +96,7 @@ public class Open_Screen extends AppCompatActivity {
     }
 
     private void openMainScreen() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), Main_Screen.class);
         startActivity(intent);
         finish();
     }

@@ -1,18 +1,13 @@
 package com.example.readapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import androidx.core.app.ActivityCompat;
 
+import com.example.readapplication.Service.AppService;
 import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {

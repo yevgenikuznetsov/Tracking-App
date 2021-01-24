@@ -4,20 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Screen">
+    tools:context=".Screen.Main_Screen">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
+        android:id="@+id/Main_RLY_Up_Tool"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/Main_BTN_first"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/Main_LAY_Log_Out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:windowBackground"
-            android:layout_gravity="bottom"
-            app:menu="@menu/navigation_menu">
+            android:background="#273036"
+            android:orientation="horizontal">
 
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <ImageView
+                android:id="@+id/Main_IMG_Log_Out"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_logout"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
+        <View
+            android:id="@+id/Open_IMG_Wave"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/Main_LAY_Log_Out"
+            android:background="@drawable/ic_wave_down"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/Main_FRG_Content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Main_RLY_Up_Tool"
+        android:layout_above="@id/Main_BTN_Navigation"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/Main_BTN_Navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/navigation_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </RelativeLayout>

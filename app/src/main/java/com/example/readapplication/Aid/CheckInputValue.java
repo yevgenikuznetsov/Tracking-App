@@ -1,4 +1,4 @@
-package com.example.readapplication;
+package com.example.readapplication.Aid;
 
 import com.google.android.material.textfield.TextInputLayout;
 

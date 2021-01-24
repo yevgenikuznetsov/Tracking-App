@@ -1,14 +1,13 @@
-package com.example.readapplication;
+package com.example.readapplication.Service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.widget.Toast;
+
+import com.example.readapplication.Object.Message;
 
 import java.util.Date;
 

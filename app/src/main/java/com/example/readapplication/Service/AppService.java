@@ -1,4 +1,4 @@
-package com.example.readapplication;
+package com.example.readapplication.Service;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -16,6 +16,10 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.example.readapplication.R;
+import com.example.readapplication.Screen.Open_Screen;
+import com.example.readapplication.Service.ReceiveSmsAndCall;
 
 public class AppService extends Service {
     public static final String START_FOREGROUND_SERVICE = "START_FOREGROUND_SERVICE";
@@ -84,7 +88,7 @@ public class AppService extends Service {
 
     private void notifyToUserForForegroundService() {
         // On notification click
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, Open_Screen.class);
         notificationIntent.setAction(MAIN_ACTION);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -2,9 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/SMSHistory"
-        android:orderInCategory="1"
+        android:id="@+id/Nav_Menu"
+        android:title="Menu"
+        android:icon="@drawable/ic_menu" />
+
+    <item
+        android:id="@+id/Nav_SMSHistory"
         android:title="All SMS"
-        android:icon="@drawable/ic_sms"
+        android:icon="@drawable/ic_sms" />
+
+    <item
+        android:id="@+id/Nav_CallHistory"
+        android:title="All Calls"
+        android:icon="@drawable/ic_call"
         />
 </menu>
