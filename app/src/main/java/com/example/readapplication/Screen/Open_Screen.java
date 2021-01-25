@@ -110,7 +110,8 @@ public class Open_Screen extends AppCompatActivity {
         ActivityCompat.requestPermissions(Open_Screen.this, new String[]{
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.RECEIVE_SMS,
-                Manifest.permission.READ_CALL_LOG}, 1);
+                Manifest.permission.READ_CALL_LOG,
+                Manifest.permission.READ_CONTACTS}, 1);
     }
 
     private void findView() {

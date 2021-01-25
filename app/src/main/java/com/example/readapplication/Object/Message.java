@@ -3,18 +3,20 @@ package com.example.readapplication.Object;
 import java.util.Date;
 
 public class Message {
-    private Date messageTime;
+    private String messageTime;
     private String sender;
     private String message;
+    private boolean isExist;
 
     public void Message() {
+        isExist = false;
     }
 
-    public Date getMessageTime() {
+    public String getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(Date messageTime) {
+    public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
 
@@ -32,5 +34,13 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isExist() {
+        return isExist;
+    }
+
+    public void setExist(boolean exist) {
+        isExist = exist;
     }
 }
