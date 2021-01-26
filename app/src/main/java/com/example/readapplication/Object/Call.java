@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class Call {
     private String callNumber;
-    private Date callStartTime;
-    private Date callSEndTime;
+    private String callStartTime;
+    private String duration;
+    private boolean isExist;
 
     public Call() {
-
+        isExist = false;
     }
 
     public String getCallNumber() {
@@ -19,19 +20,27 @@ public class Call {
         this.callNumber = callNumber;
     }
 
-    public Date getCallStartTime() {
+    public String getCallStartTime() {
         return callStartTime;
     }
 
-    public void setCallStartTime(Date callStartTime) {
+    public void setCallStartTime(String callStartTime) {
         this.callStartTime = callStartTime;
     }
 
-    public Date getCallSEndTime() {
-        return callSEndTime;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setCallSEndTime(Date callSEndTime) {
-        this.callSEndTime = callSEndTime;
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public boolean isExist() {
+        return isExist;
+    }
+
+    public void setExist(boolean exist) {
+        isExist = exist;
     }
 }

@@ -33,9 +33,6 @@ public class SMS_Fragment extends Fragment {
 
     private List<Message> smsList;
 
-    public SMS_Fragment() {
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

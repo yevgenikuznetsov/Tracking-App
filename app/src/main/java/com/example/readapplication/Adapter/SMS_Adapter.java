@@ -38,7 +38,7 @@ public class SMS_Adapter extends RecyclerView.Adapter<SMS_Adapter.ViewHolderList
         if(smsList.get(position).isExist()){
             holder.sms_LBL_exists.setText("YES");
         } else {
-            holder.sms_LBL_exists.setText("FALSE");
+            holder.sms_LBL_exists.setText("NO");
         }
     }
 
