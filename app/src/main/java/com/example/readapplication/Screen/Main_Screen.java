@@ -28,33 +28,37 @@ public class Main_Screen extends AppCompatActivity {
 
         findView();
         initButton();
+
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.Main_FRG_Content, new Menu_Fragment()).commit();
     }
 
+    // Set bottom navigation bar
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-                switch (item.getItemId()) {
-                    case R.id.Nav_Menu:
-                        selectedFragment = new Menu_Fragment();
-                        break;
-                    case R.id.Nav_SMSHistory:
-                        selectedFragment = new SMS_Fragment();
-                        break;
-                    case R.id.Nav_CallHistory:
-                        selectedFragment = new Call_Fragment();
-                        break;
-                }
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.Main_FRG_Content, selectedFragment).commit();
-
-                return true;
+            switch (item.getItemId()) {
+                case R.id.Nav_Menu:
+                    selectedFragment = new Menu_Fragment();
+                    break;
+                case R.id.Nav_SMSHistory:
+                    selectedFragment = new SMS_Fragment();
+                    break;
+                case R.id.Nav_CallHistory:
+                    selectedFragment = new Call_Fragment();
+                    break;
             }
-        };
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.Main_FRG_Content, selectedFragment).commit();
+
+            return true;
+        }
+    };
 
     private void initButton() {
+        // Log out button from the program
         main_IMG_Log_Out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

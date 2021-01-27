@@ -18,7 +18,6 @@ import com.example.readapplication.R;
 import java.util.Objects;
 
 public class Menu_Fragment extends Fragment {
-
     private Button menu_BTN_Start;
     private Button menu_BTN_Finish;
 
@@ -39,6 +38,7 @@ public class Menu_Fragment extends Fragment {
         menu_BTN_Finish = (Button) view.findViewById(R.id.Menu_BTN_Finish);
     }
 
+    // Set click listener to turn on or turn off the background service
     private void initButton() {
         menu_BTN_Start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class Menu_Fragment extends Fragment {
     }
 
     private void actionToService(String action) {
+        // Set service
         Intent startIntent = new Intent(getContext(), AppService.class);
         startIntent.setAction(action);
 

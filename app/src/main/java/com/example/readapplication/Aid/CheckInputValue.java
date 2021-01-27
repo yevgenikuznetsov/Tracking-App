@@ -7,11 +7,10 @@ public class CheckInputValue {
     public boolean validateName(TextInputLayout name) {
         String val = name.getEditText().getText().toString();
 
-        if(val.isEmpty()){
+        if (val.isEmpty()) {
             name.setError("Field cannot be empty");
             return false;
-        }
-        else {
+        } else {
             name.setError(null);
             name.setErrorEnabled(false);
             return true;
@@ -22,15 +21,13 @@ public class CheckInputValue {
         String val = email.getEditText().getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        if(val.isEmpty()){
+        if (val.isEmpty()) {
             email.setError("Field cannot be empty");
             return false;
-        }
-        else if(!val.matches(emailPattern)){
+        } else if (!val.matches(emailPattern)) {
             email.setError("Invalid email address");
             return false;
-        }
-        else {
+        } else {
             email.setError(null);
             email.setErrorEnabled(false);
             return true;
@@ -40,15 +37,13 @@ public class CheckInputValue {
     public boolean validatePassword(TextInputLayout password) {
         String val = password.getEditText().getText().toString();
 
-        if(val.isEmpty()) {
+        if (val.isEmpty()) {
             password.setError("Field cannot be empty");
             return false;
-        }
-        else if(val.length() < 6) {
-            password.setError("Password too short, you need more " + (6-val.length() + " char"));
+        } else if (val.length() < 6) {
+            password.setError("Password too short, you need more " + (6 - val.length() + " char"));
             return false;
-        }
-        else {
+        } else {
             password.setError(null);
             password.setErrorEnabled(false);
             return true;

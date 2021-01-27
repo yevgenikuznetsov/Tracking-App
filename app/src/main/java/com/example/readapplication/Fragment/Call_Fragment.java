@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.readapplication.Adapter.Call_Adapter;
-import com.example.readapplication.Adapter.SMS_Adapter;
 import com.example.readapplication.Object.Call;
-import com.example.readapplication.Object.Message;
 import com.example.readapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +53,7 @@ public class Call_Fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 callList.clear();
 
-                for(DataSnapshot snap: snapshot.getChildren()) {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     Call call = snap.getValue(Call.class);
                     callList.add(call);
                 }

@@ -53,7 +53,7 @@ public class SMS_Fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 smsList.clear();
 
-                for(DataSnapshot snap: snapshot.getChildren()) {
+                for (DataSnapshot snap : snapshot.getChildren()) {
                     Message sms = snap.getValue(Message.class);
                     smsList.add(sms);
                 }

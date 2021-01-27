@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:textColor="@color/black"
-                android:text="Call Duration:"/>
+                android:text="Duration:"/>
 
             <TextView
                 android:id="@+id/Call_LBL_Duration"

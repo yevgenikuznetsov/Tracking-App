@@ -1,13 +1,10 @@
 package com.example.readapplication.Service;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
+import com.example.readapplication.Aid.AidFunction;
 import com.example.readapplication.Object.Call;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -15,19 +12,18 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 
 public class StatePhoneListener extends PhoneStateListener {
-
-    private Context context;
     private Call call;
-    private long start_time, end_time;
+    private Context context;
+    private AidFunction aidFunction = new AidFunction();
 
     private int lastState = TelephonyManager.CALL_STATE_IDLE;
 
+    private long start_time, end_time;
     private boolean isIncoming = false;
-    private String pattern = "MM.dd.yyyy HH:mm:ss";
+    private String pattern = "dd.MM.yyyy HH:mm:ss";
 
     public StatePhoneListener(Context context) {
         this.context = context;
@@ -39,31 +35,43 @@ public class StatePhoneListener extends PhoneStateListener {
 
         DateFormat df = new SimpleDateFormat(pattern);
 
+        // Check call state
         switch (state) {
+            // When the phone rings
             case TelephonyManager.CALL_STATE_RINGING:
                 call = new Call();
+
+                // Save incoming number
                 call.setCallNumber(incomingNumber);
 
                 call.setCallStartTime(df.format(new Date()));
                 isIncoming = true;
                 break;
 
+            // When the user answers the phone call
             case TelephonyManager.CALL_STATE_OFFHOOK:
                 start_time = System.currentTimeMillis();
+
                 call.setCallStartTime(df.format(new Date()));
                 break;
 
+            // When the call idle   
             case TelephonyManager.CALL_STATE_IDLE:
-                if(lastState == TelephonyManager.CALL_STATE_RINGING){
-                    call.setDuration("Not Answer");
-                } else if (isIncoming){
+                // Checks if the user answered the call
+                if (lastState == TelephonyManager.CALL_STATE_RINGING) {
+                    call.setDuration("Not Answered");
+                } else if (isIncoming) {
                     end_time = System.currentTimeMillis();
-                    call.setDuration(duration());
+
+                    call.setDuration(aidFunction.duration(start_time, end_time));
+
                     isIncoming = false;
                 }
 
-                call.setExist(checkIfNumberInContactList(context, call.getCallNumber()));
+                // Check if colling number exist in contact list
+                call.setExist(aidFunction.checkIfNumberInContactList(context, call.getCallNumber()));
 
+                // Save call info to DB
                 saveCallToDB(call);
                 break;
         }
@@ -71,37 +79,12 @@ public class StatePhoneListener extends PhoneStateListener {
         lastState = state;
     }
 
-    private String duration() {
-        int total_time = (int)((end_time - start_time) / 1000 );
-
-        if(total_time < 60) {
-            return total_time + " s";
-        } else if(total_time >= 60 && total_time < 3600) {
-            return (total_time / 60) + " min " + (total_time % 60) + " s";
-        }else {
-            return (total_time / 60) + " hour " + (total_time % 60) + "min";
-        }
-    }
-
+    // Save call information to DB
     private void saveCallToDB(Call call) {
         DatabaseReference mDatabase;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("CALL/").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "/").child(mDatabase.push().getKey() + "/").setValue(call);
-
     }
-
-    private boolean checkIfNumberInContactList(Context context, String phoneNumber) {
-        if(phoneNumber.isEmpty()) {
-            return false;
-        }
-
-        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
-        String[] mPhoneNumberProjection = { ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
-        Cursor cur = context.getContentResolver().query(lookupUri,mPhoneNumberProjection, null, null, null);
-
-        return cur.moveToFirst();
-    }
-
 }

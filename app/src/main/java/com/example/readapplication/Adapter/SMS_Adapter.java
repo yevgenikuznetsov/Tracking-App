@@ -1,6 +1,5 @@
 package com.example.readapplication.Adapter;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import java.util.List;
 public class SMS_Adapter extends RecyclerView.Adapter<SMS_Adapter.ViewHolderList> {
     List<Message> smsList;
 
-    public SMS_Adapter(List<Message> smsList){
+    public SMS_Adapter(List<Message> smsList) {
         this.smsList = smsList;
     }
 
@@ -26,6 +25,7 @@ public class SMS_Adapter extends RecyclerView.Adapter<SMS_Adapter.ViewHolderList
     public SMS_Adapter.ViewHolderList onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sms_item, parent, false);
         final SMS_Adapter.ViewHolderList viewHolder = new SMS_Adapter.ViewHolderList(view);
+
         return viewHolder;
     }
 
@@ -35,7 +35,7 @@ public class SMS_Adapter extends RecyclerView.Adapter<SMS_Adapter.ViewHolderList
         holder.sms_LBL_date.setText(smsList.get(position).getMessageTime());
         holder.sms_LBL_message.setText(smsList.get(position).getMessage());
 
-        if(smsList.get(position).isExist()){
+        if (smsList.get(position).isExist()) {
             holder.sms_LBL_exists.setText("YES");
         } else {
             holder.sms_LBL_exists.setText("NO");

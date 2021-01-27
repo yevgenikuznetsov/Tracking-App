@@ -9,18 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.readapplication.Object.Call;
-import com.example.readapplication.Object.Message;
+
 import com.example.readapplication.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderList> {
     List<Call> callList;
 
-    public Call_Adapter(List<Call> callList){
+    public Call_Adapter(List<Call> callList) {
         this.callList = callList;
     }
 
@@ -29,6 +26,7 @@ public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderLi
     public Call_Adapter.ViewHolderList onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.call_item, parent, false);
         final Call_Adapter.ViewHolderList viewHolder = new Call_Adapter.ViewHolderList(view);
+
         return viewHolder;
     }
 
@@ -38,7 +36,7 @@ public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderLi
         holder.call_LBL_time.setText(callList.get(position).getCallStartTime());
         holder.call_LBL_duration.setText(callList.get(position).getDuration());
 
-        if(callList.get(position).isExist()){
+        if (callList.get(position).isExist()) {
             holder.call_LBL_exists.setText("YES");
         } else {
             holder.call_LBL_exists.setText("NO");
@@ -65,6 +63,4 @@ public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderLi
             call_LBL_duration = itemView.findViewById(R.id.Call_LBL_Duration);
         }
     }
-
-
 }

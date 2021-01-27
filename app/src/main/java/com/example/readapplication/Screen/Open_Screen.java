@@ -20,7 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Open_Screen extends AppCompatActivity {
-
     private TextView open_LBL_Sign_Up;
     private Button open_BTN_Sign_In;
     private TextInputLayout open_LBL_Email;
@@ -38,7 +37,7 @@ public class Open_Screen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null) {
             openMainScreen();
         }
 
@@ -47,7 +46,7 @@ public class Open_Screen extends AppCompatActivity {
         askForPermissions();
     }
 
-    private void initButton(){
+    private void initButton() {
         open_LBL_Sign_Up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +63,7 @@ public class Open_Screen extends AppCompatActivity {
 
     }
 
+    // Checks if the data entered by user is logically correct
     private void checkInputAndEnterToApp() {
         if (!checkInputValue.validateEmail(open_LBL_Email) | !checkInputValue.validatePassword(open_LBL_Password)) {
             return;
@@ -72,6 +72,7 @@ public class Open_Screen extends AppCompatActivity {
         }
     }
 
+    // Checks if a user is registered in the application
     private void isUserExist() {
         final String userEnteredEmail = open_LBL_Email.getEditText().getText().toString().trim();
         final String userEnteredPassword = open_LBL_Password.getEditText().getText().toString().trim();
@@ -81,8 +82,10 @@ public class Open_Screen extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            // User exists in DB
                             openMainScreen();
                         } else {
+                            // If the system can not to find the user in DB, it issues an error message accordingly
                             if (task.getException().getMessage().contains("email")) {
                                 open_LBL_Email.setError(task.getException().getMessage());
                             } else if (task.getException().getMessage().contains("password")) {
@@ -106,7 +109,7 @@ public class Open_Screen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void askForPermissions(){
+    private void askForPermissions() {
         ActivityCompat.requestPermissions(Open_Screen.this, new String[]{
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.RECEIVE_SMS,

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,13 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Sign_Up_Screen extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private CheckInputValue checkInputValue;
-
     private TextInputLayout sign_Up_LBL_Full_Name;
     private TextInputLayout sign_Up_LBL_Emil;
     private TextInputLayout sign_Up_LBL_Password;
     private ImageView sign_Up_LBL_Submit;
+
+    private FirebaseAuth mAuth;
+    private CheckInputValue checkInputValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class Sign_Up_Screen extends AppCompatActivity {
 
         findView();
         initButton();
-
     }
 
     private void initButton() {
@@ -48,8 +46,8 @@ public class Sign_Up_Screen extends AppCompatActivity {
         });
     }
 
+    // Checks if the data entered by user is logically correct
     private void checkValueAndStore() {
-        Log.d("pttt", "enter to check");
         if (!checkInputValue.validateName(sign_Up_LBL_Full_Name) |
                 !checkInputValue.validateEmail(sign_Up_LBL_Emil) |
                 !checkInputValue.validatePassword(sign_Up_LBL_Password)) {
@@ -59,22 +57,20 @@ public class Sign_Up_Screen extends AppCompatActivity {
         String email = sign_Up_LBL_Emil.getEditText().getText().toString().trim();
         String password = sign_Up_LBL_Password.getEditText().getText().toString().trim();
 
-        Log.d("pttt", "after check");
         saveUserInDB(email, password);
     }
 
+    // Save new user in DB and open the log in screen
     private void saveUserInDB(final String email, final String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d("pttt", "save in DB");
                             FirebaseUser user = mAuth.getCurrentUser();
                             newActivity();
                         } else {
                             if (task.getException().getMessage().contains("email")) {
-                                Log.d("pttt", "not save in DB");
                                 sign_Up_LBL_Emil.setError(task.getException().getMessage());
                             }
                         }
@@ -83,7 +79,6 @@ public class Sign_Up_Screen extends AppCompatActivity {
     }
 
     private void newActivity() {
-        Log.d("pttt", "Close activity");
         finish();
     }
 
