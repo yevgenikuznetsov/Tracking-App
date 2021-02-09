@@ -68,8 +68,11 @@ public class StatePhoneListener extends PhoneStateListener {
                     isIncoming = false;
                 }
 
+                String name = aidFunction.checkIfNumberInContactList(context, call.getCallNumber());
+
                 // Check if colling number exist in contact list
-                call.setExist(aidFunction.checkIfNumberInContactList(context, call.getCallNumber()));
+                call.setExist(!name.equals("null"));
+                call.setCallName(name);
 
                 // Save call info to DB
                 saveCallToDB(call);

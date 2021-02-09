@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class Message {
     private String messageTime;
-    private String sender;
+    private String senderNumber;
+    private String senderName;
     private String message;
     private boolean isExist;
 
@@ -18,14 +19,6 @@ public class Message {
 
     public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
     }
 
     public String getMessage() {
@@ -42,5 +35,21 @@ public class Message {
 
     public void setExist(boolean exist) {
         isExist = exist;
+    }
+
+    public String getSenderNumber() {
+        return senderNumber;
+    }
+
+    public void setSenderNumber(String senderNumber) {
+        this.senderNumber = senderNumber;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }

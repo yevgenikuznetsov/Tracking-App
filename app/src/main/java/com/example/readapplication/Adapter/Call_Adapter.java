@@ -1,5 +1,6 @@
 package com.example.readapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderLi
         return viewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull Call_Adapter.ViewHolderList holder, int position) {
         holder.call_LBL_from.setText(callList.get(position).getCallNumber());
@@ -37,7 +39,7 @@ public class Call_Adapter extends RecyclerView.Adapter<Call_Adapter.ViewHolderLi
         holder.call_LBL_duration.setText(callList.get(position).getDuration());
 
         if (callList.get(position).isExist()) {
-            holder.call_LBL_exists.setText("YES");
+            holder.call_LBL_exists.setText("YES " + " ( " + callList.get(position).getCallName() + " ) ");
         } else {
             holder.call_LBL_exists.setText("NO");
         }

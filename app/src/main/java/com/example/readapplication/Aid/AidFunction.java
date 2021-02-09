@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 public class AidFunction {
 
@@ -11,17 +12,23 @@ public class AidFunction {
     }
 
     // Check if incoming phone number exist in contact list
-    public boolean checkIfNumberInContactList(Context context, String phoneNumber) {
-        if (phoneNumber.isEmpty()) {
+    public String checkIfNumberInContactList(Context context, String phoneNumber) {
+        String name = "null";
 
-            return false;
+        if (phoneNumber.isEmpty()) {
+            return name;
         }
 
         Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
         String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME};
         Cursor cur = context.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
 
-        return cur.moveToFirst();
+        if(cur.moveToFirst()) {
+            // Get contact name from contact list
+            name = cur.getString(2);
+        }
+
+        return name;
     }
 
     // Calculate call duration

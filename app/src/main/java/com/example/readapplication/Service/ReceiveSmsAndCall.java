@@ -52,9 +52,13 @@ public class ReceiveSmsAndCall extends BroadcastReceiver {
                         msgBody = msgs[i].getMessageBody();
                     }
 
-                    message.setSender(msg_from);
+                    message.setSenderNumber(msg_from);
                     message.setMessage(msgBody);
-                    message.setExist(aidFunction.checkIfNumberInContactList(context, message.getSender()));
+
+                    String name = aidFunction.checkIfNumberInContactList(context, message.getSenderNumber());
+
+                    message.setExist(!name.equals("null"));
+                    message.setSenderName(name);
 
                     // Save incoming SMS to DB
                     saveMessage();
@@ -81,9 +85,9 @@ public class ReceiveSmsAndCall extends BroadcastReceiver {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        if (message.getSender().contains("+972")) {
-            String newNumber = "0" + message.getSender().substring(4, 13);
-            message.setSender(newNumber);
+        if (message.getSenderNumber().contains("+972")) {
+            String newNumber = "0" + message.getSenderNumber().substring(4, 13);
+            message.setSenderNumber(newNumber);
         }
 
         // Save to DB

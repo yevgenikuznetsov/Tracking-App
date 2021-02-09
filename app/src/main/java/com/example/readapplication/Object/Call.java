@@ -6,6 +6,7 @@ public class Call {
     private String callNumber;
     private String callStartTime;
     private String duration;
+    private String callName;
     private boolean isExist;
 
     public Call() {
@@ -42,5 +43,13 @@ public class Call {
 
     public void setExist(boolean exist) {
         isExist = exist;
+    }
+
+    public String getCallName() {
+        return callName;
+    }
+
+    public void setCallName(String callName) {
+        this.callName = callName;
     }
 }

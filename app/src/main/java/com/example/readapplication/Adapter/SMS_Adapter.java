@@ -1,5 +1,6 @@
 package com.example.readapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +30,15 @@ public class SMS_Adapter extends RecyclerView.Adapter<SMS_Adapter.ViewHolderList
         return viewHolder;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SMS_Adapter.ViewHolderList holder, int position) {
-        holder.sms_LBL_from.setText(smsList.get(position).getSender());
+        holder.sms_LBL_from.setText(smsList.get(position).getSenderNumber());
         holder.sms_LBL_date.setText(smsList.get(position).getMessageTime());
         holder.sms_LBL_message.setText(smsList.get(position).getMessage());
 
         if (smsList.get(position).isExist()) {
-            holder.sms_LBL_exists.setText("YES");
+            holder.sms_LBL_exists.setText("YES " + " ( " + smsList.get(position).getSenderName() + " ) ");
         } else {
             holder.sms_LBL_exists.setText("NO");
         }

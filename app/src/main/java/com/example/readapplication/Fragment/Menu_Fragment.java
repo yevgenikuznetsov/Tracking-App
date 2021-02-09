@@ -31,6 +31,8 @@ public class Menu_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         findView(view);
         initButton();
+
+        menu_BTN_Finish.setEnabled(false);
     }
 
     private void findView(View view) {
@@ -44,6 +46,9 @@ public class Menu_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 actionToService(AppService.START_FOREGROUND_SERVICE);
+
+                menu_BTN_Finish.setEnabled(true);
+                menu_BTN_Start.setEnabled(false);
             }
         });
 
@@ -51,6 +56,9 @@ public class Menu_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 actionToService(AppService.STOP_FOREGROUND_SERVICE);
+
+                menu_BTN_Finish.setEnabled(false);
+                menu_BTN_Start.setEnabled(true);
             }
         });
     }
