@@ -56,7 +56,6 @@ public class AppService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String action = intent.getAction();
 
         if (intent.getAction().equals(START_FOREGROUND_SERVICE)) {
             if (isServiceRunningRightNow) {

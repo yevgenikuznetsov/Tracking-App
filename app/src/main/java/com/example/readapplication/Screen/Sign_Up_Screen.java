@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.readapplication.Aid.CheckInputValue;
+import com.example.readapplication.Object.Status;
 import com.example.readapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Sign_Up_Screen extends AppCompatActivity {
     private TextInputLayout sign_Up_LBL_Full_Name;
@@ -23,6 +26,7 @@ public class Sign_Up_Screen extends AppCompatActivity {
     private ImageView sign_Up_LBL_Submit;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference reference;
     private CheckInputValue checkInputValue;
 
     @Override
@@ -31,6 +35,7 @@ public class Sign_Up_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_sign__up__screen);
 
         mAuth = FirebaseAuth.getInstance();
+
         checkInputValue = new CheckInputValue();
 
         findView();
@@ -68,6 +73,12 @@ public class Sign_Up_Screen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            Status status = new Status();
+                            status.setOn(false);
+
+                            FirebaseDatabase.getInstance().getReference("STATUS/").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "/").setValue(status);
+
                             newActivity();
                         } else {
                             if (task.getException().getMessage().contains("email")) {

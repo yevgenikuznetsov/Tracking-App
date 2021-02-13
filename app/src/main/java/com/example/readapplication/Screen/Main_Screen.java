@@ -13,9 +13,11 @@ import android.widget.ImageView;
 import com.example.readapplication.Fragment.Call_Fragment;
 import com.example.readapplication.Fragment.Menu_Fragment;
 import com.example.readapplication.Fragment.SMS_Fragment;
+import com.example.readapplication.Object.Status;
 import com.example.readapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Main_Screen extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;
@@ -63,6 +65,11 @@ public class Main_Screen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent;
+
+                Status status = new Status();
+                status.setOn(false);
+
+                FirebaseDatabase.getInstance().getReference("STATUS/").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "/").setValue(status);
 
                 FirebaseAuth.getInstance().signOut();
 
